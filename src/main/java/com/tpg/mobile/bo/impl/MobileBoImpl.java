@@ -6,6 +6,8 @@ import com.tpg.mobile.model.Phone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: raul.lepsa
@@ -37,5 +39,9 @@ public class MobileBoImpl implements MobileBo{
 
     public Phone findByMobilePhoneCode(String mobilePhoneCode) {
         return mobileDao.findByMobilePhoneCode(mobilePhoneCode);
+    }
+
+    public List getAllMobilePhones(){
+        return mobileDao.getAllMobilePhones();
     }
 }

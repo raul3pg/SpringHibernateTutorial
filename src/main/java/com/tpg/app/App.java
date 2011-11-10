@@ -5,6 +5,11 @@ import com.tpg.mobile.model.Phone;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Created by IntelliJ IDEA.
  * User: raul.lepsa
@@ -13,17 +18,31 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * To change this template use File | Settings | File Templates.
  */
 public class App {
+
+    private static MobileBo mobileBo;
+
     public static void main(String[] args) {
+
         // Get the application context
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("config/BeanLocations.xml");
 
         // Get the mobile business object bean
-        MobileBo mobileBo = (MobileBo)applicationContext.getBean("mobileBo");
+        mobileBo = (MobileBo)applicationContext.getBean("mobileBo");
 
-        // Insert a new mobile phone into the DB
+        //mobileBo.findByMobilePhoneCode("SMSG_GX");
+        System.out.println(getAllMobilePhones().toString());
+        //insertPhone("Samsung Galaxy", "SMSG_GX");
+        //insertPhone("Samsung Galaxy II", "SMSG_GX_II");
+    }
+
+    private static List<Phone> getAllMobilePhones(){
+        return mobileBo.getAllMobilePhones();
+    }
+
+    private static void insertPhone(String phoneName, String phoneCode){
         Phone phone = new Phone();
-        phone.setPhoneCode("SMSG_GX");
-        phone.setPhoneName("Samsung Galaxy");
+        phone.setPhoneCode(phoneCode);
+        phone.setPhoneName(phoneName);
         mobileBo.save(phone);
     }
 }

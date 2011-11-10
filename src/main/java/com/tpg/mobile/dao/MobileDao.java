@@ -2,6 +2,8 @@ package com.tpg.mobile.dao;
 
 import com.tpg.mobile.model.Phone;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: raul.lepsa
@@ -15,4 +17,5 @@ public interface MobileDao {
     void delete(Phone phone);
     void update(Phone phone);
     Phone findByMobilePhoneCode(String mobilePhoneCode);
+    List getAllMobilePhones();
 }
