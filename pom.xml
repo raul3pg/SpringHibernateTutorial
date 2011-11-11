@@ -6,7 +6,12 @@
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>SpringAnnotationMobilePhone</name>
-    <url>http://maven.apache.org</url>
+
+    <properties>
+        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring-security.version>3.0.5.RELEASE</spring-security.version>
+    </properties>
+
 
     <repositories>
         <repository>
@@ -19,22 +24,93 @@
 
     <dependencies>
 
-        <!--  Javaee API -->
+        <!-- Spring framework & Spring MVC Core dependency start-->
         <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-6.0</artifactId>
-            <version>1.0.0.Final</version>
-            <type>pom</type>
-            <scope>provided</scope>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <!-- Spring framework & Spring MVC Core dependency end-->
 
-        <!-- JUNIT -->
+        <!-- MVC Security -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+
+
+        <!-- MVC RESTful Web Services -->
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+
+        <!-- MVC Database Integration -->
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+
 
         <!-- Spring AOP dependency -->
         <dependency>
@@ -43,6 +119,7 @@
             <version>2.2</version>
         </dependency>
 
+
         <!-- MySQL database driver -->
         <dependency>
             <groupId>mysql</groupId>
@@ -50,12 +127,6 @@
             <version>5.1.9</version>
         </dependency>
 
-        <!-- Spring framework -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
-            <version>2.5.6</version>
-        </dependency>
 
         <!-- Hibernate core & annotations -->
         <dependency>
@@ -63,6 +134,7 @@
             <artifactId>hibernate-annotations</artifactId>
             <version>3.5.6-Final</version>
         </dependency>
+
 
         <!-- Hibernate library dependency start -->
         <dependency>
@@ -91,6 +163,31 @@
         <!-- Hibernate library dependency end -->
 
 
+        <!-- Validator for annotation & MVC Server Validation-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <version>4.1.0.Final</version>
+        </dependency>
+        <dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.0.2.GA</version>
+		</dependency>
+
+        <!-- MVC Rich Client Validation -->
+        <dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-js</artifactId>
+			<version>2.1.1.RELEASE</version>
+		</dependency>
+
+
         <!-- SLF4J dependencies start-->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -104,20 +201,6 @@
         </dependency>
         <!-- SLF4J dependencies end-->
 
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-        </dependency>
-
-        <!-- Java byte code processor (Java Asssist)-->
-        <dependency>
-            <groupId>javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.4.GA</version>
-        </dependency>
-
-
         <!--  Javaee API -->
         <dependency>
             <groupId>org.jboss.spec</groupId>
@@ -127,11 +210,29 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Validator for annotation -->
+
+        <!-- J-UNIT -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>4.1.0.Final</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <!-- Java byte code processor (Java Asssist)-->
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.4.GA</version>
+        </dependency>
+
+
+        <!-- Log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
         </dependency>
 
     </dependencies>

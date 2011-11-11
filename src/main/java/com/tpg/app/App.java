@@ -5,10 +5,7 @@ import com.tpg.mobile.model.Phone;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,21 +28,14 @@ public class App {
 
         // List the existing phone(s)
         System.out.println(getAllMobilePhones().toString());
-        insertPhone("Samsung Galaxy", "SMSG_GX");
-        insertPhone("Samsung Galaxy II", "SMSG_GX_II");
-        insertPhone("HTC Inspire","HTC_INSP");
-        insertPhone("HTC ChaCha","HTC_CH");
-        updatePhone("Samsung Galaxy HD", "SMSG_GX");
-        insertPhone("aa","aa");
-        deletePhone("aa");
     }
 
     private static List<Phone> getAllMobilePhones(){
-        return mobileBo.getAllMobilePhones();
+        return mobileBo.getAllPhones();
     }
 
     private static void insertPhone(String phoneName, String phoneCode){
-        if (mobileBo.findByMobilePhoneCode(phoneCode) != null){
+        if (mobileBo.getByPhoneCode(phoneCode) != null){
             return;
         }
         Phone phone = new Phone(phoneName, phoneCode);
@@ -55,15 +45,22 @@ public class App {
     }
 
     private static void updatePhone(String phoneName, String phoneCode){
-        Phone phone = mobileBo.findByMobilePhoneCode(phoneCode);
+        Phone phone = mobileBo.getByPhoneCode(phoneCode);
         if (phone == null)
             return;
         phone.setPhoneName(phoneName);
         mobileBo.update(phone);
     }
 
-    private static void deletePhone(String phoneCode){
-        Phone phone = mobileBo.findByMobilePhoneCode(phoneCode);
+    private static void deletePhoneByCode(String phoneCode){
+        Phone phone = mobileBo.getByPhoneCode(phoneCode);
+        if (phone == null)
+            return;
+        mobileBo.delete(phone);
+    }
+
+    private static void deletePhoneById(Long id){
+        Phone phone = mobileBo.getById(id);
         if (phone == null)
             return;
         mobileBo.delete(phone);

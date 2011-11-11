@@ -15,7 +15,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "phone", uniqueConstraints = {@UniqueConstraint(columnNames = "PHONE_CODE")})
 public class Phone implements Serializable{
 
-    private Integer phoneId;
+    private Long phoneId;
     private String phoneName;
     private String phoneCode;
 
@@ -30,11 +30,11 @@ public class Phone implements Serializable{
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "PHONE_ID", unique = true, nullable = false)
-    public Integer getPhoneId() {
+    public Long getPhoneId() {
         return phoneId;
     }
 
-    public void setPhoneId(Integer phoneId) {
+    public void setPhoneId(Long phoneId) {
         this.phoneId = phoneId;
     }
 

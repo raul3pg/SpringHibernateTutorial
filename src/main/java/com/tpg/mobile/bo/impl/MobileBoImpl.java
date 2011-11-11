@@ -37,11 +37,15 @@ public class MobileBoImpl implements MobileBo{
         mobileDao.update(phone);
     }
 
-    public Phone findByMobilePhoneCode(String mobilePhoneCode) {
-        return mobileDao.findByMobilePhoneCode(mobilePhoneCode);
+    public Phone getByPhoneCode(String phoneCode) {
+        return mobileDao.getByPhoneCode(phoneCode);
     }
 
-    public List getAllMobilePhones(){
-        return mobileDao.getAllMobilePhones();
+    public Phone getById(Long id){
+        return mobileDao.getById(id);
+    }
+
+    public List getAllPhones(){
+        return mobileDao.getAllPhones();
     }
 }

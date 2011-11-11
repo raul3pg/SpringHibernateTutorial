@@ -16,6 +16,7 @@ public interface MobileBo {
     void save(Phone phone);
     void delete(Phone phone);
     void update(Phone phone);
-    Phone findByMobilePhoneCode(String mobilePhoneCode);
-    List getAllMobilePhones();
+    Phone getByPhoneCode(String phoneCode);
+    Phone getById(Long id);
+    List getAllPhones();
 }
