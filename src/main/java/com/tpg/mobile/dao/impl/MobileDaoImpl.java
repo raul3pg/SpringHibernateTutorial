@@ -31,8 +31,10 @@ public class MobileDaoImpl extends CustomHibernateDaoSupport implements MobileDa
     }
 
     public Phone findByMobilePhoneCode(String phoneCode) {
-        List list = getHibernateTemplate().find("From phone where phoneCode=?", phoneCode);
-        return (Phone)list;
+        List list = getHibernateTemplate().find("from Phone where phoneCode=?", phoneCode);
+        if (list.size() > 0)
+            return (Phone)list.get(0);
+        return null;
     }
 
     public List getAllMobilePhones(){

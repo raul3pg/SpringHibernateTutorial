@@ -16,14 +16,15 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Phone implements Serializable{
 
     private Integer phoneId;
-    private String phoneCode;
     private String phoneName;
+    private String phoneCode;
+
 
     public Phone(){}
 
-    public Phone(String phoneCode, String phoneName) {
-        this.phoneCode = phoneCode;
+    public Phone(String phoneName, String phoneCode) {
         this.phoneName = phoneName;
+        this.phoneCode = phoneCode;
     }
 
     @Id
@@ -37,7 +38,7 @@ public class Phone implements Serializable{
         this.phoneId = phoneId;
     }
 
-    @Column(name = "PHONE_CODE", unique = true, nullable = false, length = 10)
+    @Column(name = "PHONE_CODE", unique = true, nullable = false, length = 20)
     public String getPhoneCode() {
         return phoneCode;
     }
@@ -46,7 +47,7 @@ public class Phone implements Serializable{
         this.phoneCode = phoneCode;
     }
 
-    @Column(name = "PHONE_NAME", nullable = false, length = 30)
+    @Column(name = "PHONE_NAME", nullable = false, length = 40)
     public String getPhoneName() {
         return phoneName;
     }

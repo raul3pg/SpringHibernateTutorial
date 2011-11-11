@@ -29,10 +29,15 @@ public class App {
         // Get the mobile business object bean
         mobileBo = (MobileBo)applicationContext.getBean("mobileBo");
 
-        //mobileBo.findByMobilePhoneCode("SMSG_GX");
+        // List the existing phone(s)
         System.out.println(getAllMobilePhones().toString());
-        //insertPhone("Samsung Galaxy", "SMSG_GX");
-        //insertPhone("Samsung Galaxy II", "SMSG_GX_II");
+        insertPhone("Samsung Galaxy", "SMSG_GX");
+        insertPhone("Samsung Galaxy II", "SMSG_GX_II");
+        insertPhone("HTC Inspire","HTC_INSP");
+        insertPhone("HTC ChaCha","HTC_CH");
+        updatePhone("Samsung Galaxy HD", "SMSG_GX");
+        insertPhone("aa","aa");
+        deletePhone("aa");
     }
 
     private static List<Phone> getAllMobilePhones(){
@@ -40,9 +45,27 @@ public class App {
     }
 
     private static void insertPhone(String phoneName, String phoneCode){
-        Phone phone = new Phone();
+        if (mobileBo.findByMobilePhoneCode(phoneCode) != null){
+            return;
+        }
+        Phone phone = new Phone(phoneName, phoneCode);
         phone.setPhoneCode(phoneCode);
         phone.setPhoneName(phoneName);
         mobileBo.save(phone);
+    }
+
+    private static void updatePhone(String phoneName, String phoneCode){
+        Phone phone = mobileBo.findByMobilePhoneCode(phoneCode);
+        if (phone == null)
+            return;
+        phone.setPhoneName(phoneName);
+        mobileBo.update(phone);
+    }
+
+    private static void deletePhone(String phoneCode){
+        Phone phone = mobileBo.findByMobilePhoneCode(phoneCode);
+        if (phone == null)
+            return;
+        mobileBo.delete(phone);
     }
 }
