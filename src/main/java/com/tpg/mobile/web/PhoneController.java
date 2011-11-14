@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/phones")
 public class PhoneController {
 
+    @Autowired
 	private MobileBo mobileBo;
 
 	@RequestMapping(method = RequestMethod.GET)
