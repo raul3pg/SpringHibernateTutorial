@@ -2,20 +2,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+<script type="text/javascript" src="../../js/jscript.js"></script>
+
 <c:url var="formUrl" value="/phones"/>
+
+<c:if test="${not empty bindablePhone.id}">
+    <button onclick="deletePhone(${bindablePhone.id})">
+        <spring:message code="button.delete"/>
+    </button>
+</c:if>
+
 <form:form action="${formUrl}" modelAttribute="bindablePhone">
-    <ul class="button">
-        <c:if test="${not empty bindablePhone.id}">
-            <li>
-                <a href="<c:url value='/phones/${bindablePhone.id}/delete' />">
-                    <spring:message code="button.delete"/>
-                </a>
-            </li>
-        </c:if>
-        <li>
-            <input id="submit" type="submit" value="<spring:message code="button.save"/>" />
-        </li>
-    </ul>
+    <input id="submit" type="submit" value="<spring:message code="button.save"/>"/>
     <form:hidden path="id"/>
     <ul>
         <li>

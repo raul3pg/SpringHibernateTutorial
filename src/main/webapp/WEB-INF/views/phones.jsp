@@ -1,11 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<ul class="button">
-    <li><a href="<c:url value="/phones/new" />">
-        <spring:message code="button.add-phone" />
-    </a></li>
-</ul>
+<script type="text/javascript" src="../../js/jscript.js"></script>
+
+<button onclick="redirectToAddPhone()">
+    <spring:message code="button.add-phone"/>
+</button>
 
 <table cellpadding="0" cellspacing="0">
     <thead>
