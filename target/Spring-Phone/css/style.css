@@ -1,0 +1,10 @@
+table{
+    border: 2px solid;
+    border-color: navy;
+    border-radius: 5px;
+    width: 20%;
+}
+td, th{
+    text-align: center;
+    font-family: sans-serif;
+}

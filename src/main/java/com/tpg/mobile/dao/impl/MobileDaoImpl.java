@@ -19,7 +19,7 @@ import java.util.List;
 public class MobileDaoImpl extends CustomHibernateDaoSupport implements MobileDao{
 
     public void save(Phone phone) {
-        getHibernateTemplate().save(phone);
+        getHibernateTemplate().saveOrUpdate(phone);
     }
 
     public void delete(Phone phone) {

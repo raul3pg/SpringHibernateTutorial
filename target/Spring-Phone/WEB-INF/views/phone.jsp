@@ -2,7 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<script type="text/javascript" src="../../js/jscript.js"></script>
+<script type="text/javascript" src="../../js/js.js"></script>
+
 
 <c:url var="formUrl" value="/phones"/>
 

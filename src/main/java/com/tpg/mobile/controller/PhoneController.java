@@ -7,6 +7,7 @@ package com.tpg.mobile.controller;
  * Time: 9:32 AM
  * To change this template use File | Settings | File Templates.
  */
+
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -27,50 +28,56 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PhoneController {
 
     @Autowired
-	private MobileBo mobileBo;
+    private MobileBo mobileBo;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public Collection<BindablePhone> getAllMobilePhones() {
-		return BindablePhone.bindablePhones(mobileBo.getAllPhones());
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public Collection<BindablePhone> getAllMobilePhones() {
+        return BindablePhone.bindablePhones(mobileBo.getAllPhones());
+    }
 
-	@RequestMapping(value = "/new", method = RequestMethod.GET)
-	public String get(Model model) {
-		return get(null, model);
-	}
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public String get(Model model) {
+        return get(null, model);
+    }
 
-	@RequestMapping(value = "/{phoneId}", method = RequestMethod.GET)
-	public String get(@PathVariable Long phoneId, Model model) {
-		Phone phone = mobileBo.getById(phoneId);
-		if (phone != null) {
-			model.addAttribute(new BindablePhone(phone));
-		} else {
-			model.addAttribute(new BindablePhone());
-		}
-		return "phone";
-	}
+    @RequestMapping(value = "/{phoneId}", method = RequestMethod.GET)
+    public String get(@PathVariable Long phoneId, Model model) {
+        Phone phone = mobileBo.getById(phoneId);
+        if (phone != null) {
+            model.addAttribute(new BindablePhone(phone));
+        } else {
+            model.addAttribute(new BindablePhone());
+        }
+        return "phone";
+    }
 
-	@RequestMapping(value = "/{phoneId}/delete", method = RequestMethod.GET)
-	public String deleteViaGet(@PathVariable Long phoneId) {
-		return delete(phoneId);
-	}
+    @RequestMapping(value = "/{phoneId}/delete", method = RequestMethod.GET)
+    public String deleteViaGet(@PathVariable Long phoneId) {
+        return delete(phoneId);
+    }
 
-	@RequestMapping(value = "/{phoneId}", method = RequestMethod.DELETE)
-	public String delete(@PathVariable Long phoneId) {
-		Phone phone = mobileBo.getById(phoneId);
+    @RequestMapping(value = "/{phoneId}", method = RequestMethod.DELETE)
+    public String delete(@PathVariable Long phoneId) {
+        Phone phone = mobileBo.getById(phoneId);
         if (phone != null)
             mobileBo.delete(phone);
-		return "redirect:../../phones";
-	}
+        return "redirect:../../phones";
+    }
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String save(@Valid BindablePhone bindablePhone, BindingResult bindingResult) {
+    @RequestMapping(method = RequestMethod.POST)
+    public String save(@Valid BindablePhone bindablePhone, BindingResult bindingResult) {
 
-		if (bindingResult.hasErrors()) {
-			return "phone";
-		}
-
-		mobileBo.save(bindablePhone.asPhone());
-		return "redirect:phones";
-	}
+        if (bindingResult.hasErrors()) {
+            return "phone";
+        }
+        Phone phone = bindablePhone.asPhone();
+        Phone existentPhone = mobileBo.getByPhoneCode(phone.getPhoneCode());
+        if (existentPhone != null) {
+            existentPhone.setPhoneName(phone.getPhoneName());
+            mobileBo.update(existentPhone);
+        } else {
+            mobileBo.save(phone);
+        }
+        return "redirect:phones";
+    }
 }
